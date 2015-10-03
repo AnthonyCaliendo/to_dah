@@ -1,4 +1,4 @@
-# to_dah
+# ToDah
 
 Exploratory Android ToDo List App
 
@@ -9,7 +9,10 @@ Exploratory Android ToDo List App
 1. delete todo
 1. complete todo
 1. filter todos
+1. persists todos in SQLite db
+1. persists filtering settings in SQLite db
 
+![todah-features](https://cloud.githubusercontent.com/assets/48271/10261463/f741681e-695e-11e5-8eb0-95219c68447f.gif)
 
 
 ## Future Enhancements
