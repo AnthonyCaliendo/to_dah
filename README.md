@@ -1,6 +1,25 @@
 # ToDah
 
-Exploratory Android ToDo List App
+This is an Android demo app which provides basic todo list management.
+
+Time Spent: 3-4 hours in total
+
+Completed user stories:
+
+* [x] Required: Can you successfully add and remove items from the todo list within your app?
+* [x] Required: Did you include support for editing todo items as described above?
+* [x] Required: Does your app persist todo items and retrieve them properly on app restart?
+* [x] Required: Did you successfully push your code to github? Can you see the code on github?
+* [x] Required: Did you add a README which includes a GIF walkthrough of the app's functionality?
+* [x] Required: Did you create an issue on the repo and include /cc @codepathreview @codepath in the issue body?
+* [x] Optional: Persist the todo items into SQLite instead of a text file
+* [x] Optional: Improve style of the todo items in the list using a custom adapter
+* [/] Optional: Add support for completion due dates for todo items (and display within listview item)
+    - I didn't like the design of showing them in the listview item, but implemented due dates
+* [/] Optional: Use a DialogFragment instead of new Activity for editing items
+    -  I didn't like this UI; However I did use a dialog for confirming delete.
+
+ Notes:  I read up on material design a little bit, mostly to play around with in this app (but it doesn't implement it really).
 
 ## Features
 
@@ -12,8 +31,9 @@ Exploratory Android ToDo List App
 1. persists todos in SQLite db
 1. persists filtering settings in SQLite db
 
-![todah-features](https://cloud.githubusercontent.com/assets/48271/10261463/f741681e-695e-11e5-8eb0-95219c68447f.gif)
+![todah-walkthrough](https://cloud.githubusercontent.com/assets/48271/10261463/f741681e-695e-11e5-8eb0-95219c68447f.gif)
 
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Future Enhancements
 
