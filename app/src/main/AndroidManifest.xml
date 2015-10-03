@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anthonycaliendo.todah" >
+
+    <application
+        android:name="com.activeandroid.app.Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/checkbox_icon"
+        android:logo="@mipmap/checkbox_icon"
+        android:label="@string/app_name"
+        android:theme="@style/DefaultTheme" >
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Todah.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.anthonycaliendo.todah.model.Todo, com.anthonycaliendo.todah.model.Settings" />
+
+        <activity
+            android:name=".activity.ViewTodosActivity"
+            android:label="@string/view_todos_label" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.EditTodoActivity"
+            android:label="@string/edit_todo_label" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ViewTodosActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT_OR_EDIT" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ToDah</string>
+
+    <!-- view all todos activity -->
+    <string name="view_todos_label">@string/app_name</string>
+    <string name="view_todos_menu_show_pending">Show Pending</string>
+    <string name="view_todos_menu_hide_pending">Hide Pending</string>
+    <string name="view_todos_menu_show_completed">Show Completed</string>
+    <string name="view_todos_menu_hide_completed">Hide Completed</string>
+    <string name="view_todos_menu_show_late">Show Late</string>
+    <string name="view_todos_menu_hide_late">Hide Late</string>
+    <string name="view_todos_add_todo_action">Add Todo</string>
+
+    <!-- data entry activity -->
+    <string name="edit_todo_label">Enter Todo</string>
+    <string name="edit_todo_menu_save">Save</string>
+    <string name="edit_todo_menu_delete">Delete</string>
+    <string name="edit_todo_menu_complete">Complete</string>
+    <string name="edit_todo_title_input">Name</string>
+    <string name="edit_todo_description_input">Description (Optional)</string>
+    <string name="edit_todo_due_date_input">Due Date</string>
+    <string name="edit_todo_priority_input">Priority</string>
+    <string name="edit_todo_delete_confirm_title">Delete Todo</string>
+    <string name="edit_todo_delete_confirm_message">Are you sure you wish to delete this todo?</string>
+    <string name="edit_todo_delete_confirm_yes">Delete</string>
+    <string name="edit_todo_delete_confirm_no">Cancel</string>
+</resources>

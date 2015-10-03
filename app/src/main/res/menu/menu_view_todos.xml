@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ViewTodos">
+
+    <item android:id="@+id/view_todos_show_pending_action"
+          android:title="@string/view_todos_menu_show_pending"
+          android:orderInCategory="10"
+          app:showAsAction="never" />
+
+    <item android:id="@+id/view_todos_show_completed_action"
+          android:title="@string/view_todos_menu_show_completed"
+          android:orderInCategory="20"
+          app:showAsAction="never" />
+
+    <item android:id="@+id/view_todos_show_late_action"
+          android:title="@string/view_todos_menu_show_late"
+          android:orderInCategory="30"
+        android:visible="false"
+          app:showAsAction="never" />
+
+</menu>

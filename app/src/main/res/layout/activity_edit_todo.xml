@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_todo_title_input"
+        android:hint="@string/edit_todo_title_input"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_todo_description_input"
+        android:hint="@string/edit_todo_description_input"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/edit_todo_title_input"
+        android:inputType="textMultiLine"
+        android:isScrollContainer="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_todo_due_date_input"
+        android:id="@+id/add_todo_due_date_label"
+        android:layout_below="@id/edit_todo_description_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_todo_due_date_input"
+        android:layout_below="@id/add_todo_due_date_label"
+        android:layout_centerHorizontal="true"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_todo_priority_input"
+        android:id="@+id/edit_todo_priority_label"
+        android:layout_below="@id/edit_todo_due_date_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_todo_priority_input"
+        android:layout_below="@+id/edit_todo_priority_label"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

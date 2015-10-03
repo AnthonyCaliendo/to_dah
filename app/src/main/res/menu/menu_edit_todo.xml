@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools" tools:context=".EditTodo">
+
+    <item android:id="@+id/edit_todo_complete_todo_action"
+        android:title="@string/edit_todo_menu_complete"
+        android:icon="@drawable/ic_check_box_white_24dp"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/edit_todo_delete_todo_action"
+        android:title="@string/edit_todo_menu_delete"
+        android:icon="@drawable/ic_delete_white_24dp"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/edit_todo_save_todo_action"
+        android:title="@string/edit_todo_menu_save"
+        android:icon="@drawable/ic_save_white_24dp"
+        app:showAsAction="always" />
+</menu>
