@@ -25,3 +25,4 @@ These are things I'd like to do with this in the future one I learn more about A
 1. implement a checkbox on the listview to complete actions
 1. implement swipe on the listview to delete the item
 1. implement drag and drop on the listview to change order
+1. implement support for filtering late todos
