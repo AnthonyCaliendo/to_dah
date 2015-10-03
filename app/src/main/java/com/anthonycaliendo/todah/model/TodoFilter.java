@@ -5,13 +5,10 @@ import android.util.Log;
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * Retrieves a filtered list of Todos.
+ * Retrieves a filtered list of To-dos.
  */
 
 public class TodoFilter {
@@ -26,9 +23,9 @@ public class TodoFilter {
     }
 
     /**
-     * Applies filters and returns all matching todos.
+     * Applies filters and returns all matching to-dos.
      * @return
-     *      the list of filtered todos
+     *      the list of filtered to-dos
      */
     public List<Todo> getTodos() {
         final From query = new Select().from(Todo.class);
@@ -50,11 +47,11 @@ public class TodoFilter {
             whereClause.append('"');
         }
 
-        query.where(whereClause.toString());
+        query.where(whereClause.toString()).orderBy("Priority ASC");
 
         debug("sql=" + query.toSql());
 
-        return query.orderBy("Priority ASC").execute();
+        return query.execute();
     }
 
     /**

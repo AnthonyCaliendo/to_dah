@@ -19,7 +19,7 @@ import com.anthonycaliendo.todah.model.Todo;
 import java.util.Calendar;
 
 /**
- * Activity which edits Todos.  This will create new Todos, or update existing Todos.
+ * Activity which edits to-dos.  This will create new to-dos, update existing to-dos, mark to-dos as completed, or delete them altogether.
  */
 public class EditTodoActivity extends AppCompatActivity {
 
@@ -48,23 +48,6 @@ public class EditTodoActivity extends AppCompatActivity {
         return result;
     }
 
-    /**
-     * Hides menu items based on if this is a editing a new or existing object.
-     * @param menu
-     *      the menu to update
-     */
-    private void toggleMenuItems(Menu menu) {
-        final boolean isNewTodo = todo.getId() == null;
-
-        if (isNewTodo || todo.isCompleted()) {
-            menu.findItem(R.id.edit_todo_complete_todo_action).setVisible(false);
-        }
-
-        if (isNewTodo) {
-            menu.findItem(R.id.edit_todo_delete_todo_action).setVisible(false);
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -82,11 +65,28 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Binds the fields to the model and persists those changes, then finishes the activity.
+     * Hides menu items based on if this is a editing a new or existing to-do.
+     * @param menu
+     *      the menu to update
+     */
+    private void toggleMenuItems(Menu menu) {
+        final boolean isNewTodo = todo.getId() == null;
+
+        if (isNewTodo || todo.isCompleted()) {
+            menu.findItem(R.id.edit_todo_complete_todo_action).setVisible(false);
+        }
+
+        if (isNewTodo) {
+            menu.findItem(R.id.edit_todo_delete_todo_action).setVisible(false);
+        }
+    }
+
+    /**
+     * Binds the fields to the to-do and persists those changes, then finishes the activity.
      * @param todo
-     *      the model object being saved
+     *      the to-do object being saved
      * @param inputs
-     *      the input fields which contain the values to be applied
+     *      the input fields which contain the values to be applied to the to-do
      */
     private void saveAndFinish(final Todo todo, final Inputs inputs) {
         inputs.bindTo(todo);
@@ -95,11 +95,12 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Binds the fields to the model and persists those changes, completes the todo, then finishes the activity.
+     * Binds the fields to the to-do and persists those changes, completes the to-do, then finishes the activity.
+     * This means that we will apply any pending edits to the to-do before marking it as completed!
      * @param todo
-     *      the model object being completed
+     *      the to-do object being completed
      * @param inputs
-     *      the input fields which contain the values to be applied
+     *      the input fields which contain the values to be applied to the to-do
      */
     private void completeAndFinish(final Todo todo, final Inputs inputs) {
         debug("action=complete id=" + todo.getId());
@@ -108,9 +109,9 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Prompts the user whether they are sure they want to delete.
+     * Prompts the user for whether they are sure they want to delete.
      * @param todo
-     *      the object to delete
+     *      the to-do to delete
      */
     private void promptForDelete(final Todo todo) {
         AlertDialog deleteConfirmation = new AlertDialog.Builder(this)
@@ -133,9 +134,9 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Deletes this object and finishes this activity.
+     * Deletes this to-do and finishes this activity.
      * @param todo
-     *  the object to delete
+     *      the to-do to delete
      */
     private void deleteAndFinish(final Todo todo) {
         debug("action=delete id=" + todo.getId());
@@ -145,9 +146,9 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Gets the model object being edited.
+     * Gets the to-do object being edited.
      * @return
-     *      the existing or new model object which is being edited
+     *      the existing or new to-do object which is being edited
      */
     private Todo initializeTodo() {
         final Intent intent = getIntent();
@@ -173,7 +174,7 @@ public class EditTodoActivity extends AppCompatActivity {
     }
 
     /**
-     * Used to bind the EditTodoActivity input fields to and from the model.
+     * Used to bind the EditTodoActivity input fields to and from the to-do object.
      */
     private class Inputs {
         final EditText     titleInput;
@@ -192,9 +193,9 @@ public class EditTodoActivity extends AppCompatActivity {
         }
 
         /**
-         * Sets the values in the input fields based on the values on the model object.
+         * Sets the values on the input fields based on the values on the to-do object.
          * @param todo
-         *      the model which has the values to be used to populate the input fields
+         *      the to-do object which has the values to be used to populate the input fields
          */
         void bindFrom(final Todo todo) {
             if (todo == null) {
@@ -208,9 +209,9 @@ public class EditTodoActivity extends AppCompatActivity {
         }
 
         /**
-         * Sets the values on the model object based on the values in the input fields.
+         * Sets the values on the to-do object based on the values on the input fields.
          * @param todo
-         *      the model to set the values on
+         *      the to-do object to modify
          */
         void bindTo(Todo todo) {
             if (todo == null) {

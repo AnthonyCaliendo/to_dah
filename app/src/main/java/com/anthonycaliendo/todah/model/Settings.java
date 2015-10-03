@@ -11,19 +11,19 @@ import com.activeandroid.annotation.Table;
 public class Settings extends Model {
 
     /**
-     * Whether we should show pending todos.
+     * Whether we should show pending to-dos.
      */
     @Column
     private boolean showPending;
 
     /**
-     * Whether we should show completed todos.
+     * Whether we should show completed to-dos.
      */
     @Column
     private boolean showCompleted;
 
     /**
-     * Whether we should show late todos.
+     * Whether we should show late to-dos.
      */
     @Column
     private boolean showLate;

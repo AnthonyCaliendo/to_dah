@@ -1,7 +1,5 @@
 package com.anthonycaliendo.todah.model;
 
-import android.util.Log;
-
 import com.activeandroid.query.Delete;
 import com.anthonycaliendo.todah.ActiveAndroidTestCase;
 

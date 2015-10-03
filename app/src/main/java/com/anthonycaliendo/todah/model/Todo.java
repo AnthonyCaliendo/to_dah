@@ -4,7 +4,6 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -15,16 +14,34 @@ public class Todo extends Model implements Comparable<Todo> {
 
     public static final String ID_INTENT_KEY = "todo.id";
 
+    /**
+     * The main title of this task.  Used in the main list view, and the only required piece of info.
+     */
     @Column
     private String title;
+    /**
+     * Extra notes the user can store about this to-do.
+     */
     @Column
     private String description;
+    /**
+     * The priority, which will be used for sorting and prioritization by the user.
+     */
     @Column
     private long priority;
+    /**
+     * Internal field used to manage the state of the to-do (e.g. completed or pending).
+     */
     @Column
     private Status status;
+    /**
+     * The due date for this to-do.  Once the due date elapses, the to-do is considered late.
+     */
     @Column
     private Calendar dueDate;
+    /**
+     * The date the to-do was completed on. Tracked for some future functionality.
+     */
     @Column
     private Calendar completedOn;
 
@@ -98,7 +115,7 @@ public class Todo extends Model implements Comparable<Todo> {
     }
 
     /**
-     * Completes this task, setting the status and completed date.
+     * Completes this to-do, setting the status and completed date.
      */
     public void complete() {
         setCompletedOn(Calendar.getInstance());

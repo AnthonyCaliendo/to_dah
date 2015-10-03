@@ -19,7 +19,7 @@ import com.anthonycaliendo.todah.model.TodoFilter;
 import com.anthonycaliendo.todah.widget.TodoAdapter;
 
 /**
- * Activity which displays todos.
+ * Activity which displays to-dos and allows the user to filter and manage their to-dos.
  */
 public class ViewTodosActivity extends AppCompatActivity {
 
@@ -93,10 +93,10 @@ public class ViewTodosActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up the action to edit todos.
-     * Configures a long-click listener on the list items to transition to the edit acvitity.
+     * Sets up the action to edit to-dos.
+     * Configures a long-click listener on the list items to transition to the edit activity.
      * @param todosListView
-     *      the listview which contains the todos
+     *      the list view which contains the to-dos
      */
     private void setupEditAction(final ListView todosListView) {
         todosListView.setOnItemClickListener(
@@ -122,8 +122,8 @@ public class ViewTodosActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up the action to add new todos.
-     * Configures an onclick listener on the action to transition to the edit acvitity.
+     * Sets up the action to add new to-dos.
+     * Configures an onclick listener on the action to transition to the edit activity.
      */
     private void setupAddAction() {
         findViewById(R.id.view_todos_add_todo_button).setOnClickListener(new View.OnClickListener() {
@@ -136,7 +136,7 @@ public class ViewTodosActivity extends AppCompatActivity {
     }
 
     /**
-     * Refreshes the list of todos and updates the display.
+     * Refreshes the list of to-dos and updates the display.
      */
     private void refreshTodos() {
         final ArrayAdapter listAdapter = getTodosListAdapter();
@@ -175,9 +175,9 @@ public class ViewTodosActivity extends AppCompatActivity {
     }
 
     /**
-     * Returns the list adapter used for the todos.
+     * Returns the list adapter used for the to-dos.
      * @return
-     *      the list adapter for the todos
+     *      the list adapter for the to-dos
      */
     private ArrayAdapter getTodosListAdapter() {
         return (ArrayAdapter) ((ListView) findViewById(R.id.view_todos_list)).getAdapter();
