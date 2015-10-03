@@ -14,10 +14,10 @@ Completed user stories:
 * [x] Required: Did you create an issue on the repo and include /cc @codepathreview @codepath in the issue body?
 * [x] Optional: Persist the todo items into SQLite instead of a text file
 * [x] Optional: Improve style of the todo items in the list using a custom adapter
-* [/] Optional: Add support for completion due dates for todo items (and display within listview item)
-    - I didn't like the design of showing them in the listview item, but implemented due dates
-* [/] Optional: Use a DialogFragment instead of new Activity for editing items
-    -  I didn't like this UI; However I did use a dialog for confirming delete.
+* [x] Optional: Add support for completion due dates for todo items (and display within listview item)
+    - I didn't like the design of showing them in the listview item, but implemented due dates so counting this as completed
+* [ ] Optional: Use a DialogFragment instead of new Activity for editing items
+    -  I didn't like this UI, so didn't implement this.  However I did use a dialog for confirming delete.
 
  Notes:  I read up on material design a little bit, mostly to play around with in this app (but it doesn't implement it really).
 
@@ -31,9 +31,11 @@ Completed user stories:
 1. persists todos in SQLite db
 1. persists filtering settings in SQLite db
 
-![todah-walkthrough](https://cloud.githubusercontent.com/assets/48271/10261463/f741681e-695e-11e5-8eb0-95219c68447f.gif)
+![todah-walkthrough](todah-walkthrough.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+Icon downloaded from [IconArchive](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/checkbox-icon.html).
 
 ## Future Enhancements
 
