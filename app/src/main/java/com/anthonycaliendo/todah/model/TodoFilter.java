@@ -33,7 +33,6 @@ public class TodoFilter {
     public List<Todo> getTodos() {
         final From query = new Select().from(Todo.class);
 
-        boolean hasDateParam = false;
         final StringBuilder whereClause = new StringBuilder();
         if (settings.isShowPending() && settings.isShowCompleted()) {
             whereClause.append("status IN (\"");
@@ -49,26 +48,9 @@ public class TodoFilter {
             whereClause.append("status = \"");
             whereClause.append(Todo.Status.COMPLETED);
             whereClause.append('"');
-        } else if (settings.isShowLate()) {
-            hasDateParam = true;
-            whereClause.append("DueDate <= ? AND status != \"");
-            whereClause.append(Todo.Status.COMPLETED);
-            whereClause.append('"');
         }
 
-        if (!settings.isShowLate()) {
-            if (whereClause.length() > 0) {
-                whereClause.append(" AND ");
-            }
-            hasDateParam = true;
-            whereClause.append("(DueDate > ?)");
-        }
-
-        if (hasDateParam) {
-            query.where(whereClause.toString(), Calendar.getInstance());
-        } else {
-            query.where(whereClause.toString());
-        }
+        query.where(whereClause.toString());
 
         debug("sql=" + query.toSql());
 
