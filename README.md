@@ -35,7 +35,9 @@ Completed user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-Icon downloaded from [IconArchive](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/checkbox-icon.html).
+App Launcher Icon downloaded from [IconArchive](http://www.iconarchive.com/show/captiva-icons-by-bokehlicia/checkbox-icon.html) ([GNU General Public License](https://en.wikipedia.org/wiki/GNU_General_Public_License)).
+
+App UI Icons downloaded from [Google Design Icons](https://www.google.com/design/icons/) ([CC-BY license](https://creativecommons.org/licenses/by/4.0/)).
 
 ## Future Enhancements
 
