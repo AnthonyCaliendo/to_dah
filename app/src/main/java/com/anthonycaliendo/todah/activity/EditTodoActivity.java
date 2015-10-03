@@ -188,7 +188,7 @@ public class EditTodoActivity extends AppCompatActivity {
             priorityInput    = (NumberPicker) findViewById(R.id.edit_todo_priority_input);
 
             priorityInput.setMinValue(0);
-            priorityInput.setMaxValue(99);
+            priorityInput.setMaxValue(9);
         }
 
         /**
