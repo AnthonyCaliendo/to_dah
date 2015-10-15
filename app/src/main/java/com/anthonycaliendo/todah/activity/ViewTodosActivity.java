@@ -3,7 +3,6 @@ package com.anthonycaliendo.todah.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +16,8 @@ import com.anthonycaliendo.todah.model.Settings;
 import com.anthonycaliendo.todah.model.Todo;
 import com.anthonycaliendo.todah.model.TodoFilter;
 import com.anthonycaliendo.todah.widget.TodoAdapter;
+
+import static com.anthonycaliendo.todah.util.Instrumentation.debug;
 
 /**
  * Activity which displays to-dos and allows the user to filter and manage their to-dos.
@@ -83,7 +84,7 @@ public class ViewTodosActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        debug("method=onActivityResult requestCode=" + requestCode + "resultCode=" + resultCode);
+        debug(this, "method=onActivityResult requestCode=" + requestCode + "resultCode=" + resultCode);
 
         if (resultCode == RESULT_OK) {
             refreshTodos();
@@ -104,7 +105,7 @@ public class ViewTodosActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         final Todo todo = (Todo) getTodosListAdapter().getItem(position);
-                        debug("action=longPress id=" + todo.getId());
+                        debug(this, "action=longPress id=" + todo.getId());
                         final Intent intent = new Intent(ViewTodosActivity.this, EditTodoActivity.class);
 
                         /* The row id doesn't get serialized even if you make the model serializable, which means
@@ -199,15 +200,6 @@ public class ViewTodosActivity extends AppCompatActivity {
         }
 
         return settings;
-    }
-
-    /**
-     * Logs the message at DEBUG level.
-     * @param message
-     *      the message to log
-     */
-    private void debug(final String message) {
-        Log.d(this.getClass().getSimpleName(), message);
     }
 
 }

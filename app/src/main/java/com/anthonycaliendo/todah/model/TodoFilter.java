@@ -1,11 +1,12 @@
 package com.anthonycaliendo.todah.model;
 
-import android.util.Log;
-
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 
+import java.util.Collections;
 import java.util.List;
+
+import static com.anthonycaliendo.todah.util.Instrumentation.debug;
 
 /**
  * Retrieves a filtered list of To-dos.
@@ -49,17 +50,9 @@ public class TodoFilter {
 
         query.where(whereClause.toString()).orderBy("Priority ASC");
 
-        debug("sql=" + query.toSql());
+        debug(this, "sql=" + query.toSql());
 
         return query.execute();
     }
 
-    /**
-     * Logs the message at DEBUG level.
-     * @param message
-     *      the message to log
-     */
-    private void debug(final String message) {
-        Log.d(this.getClass().getSimpleName(), message);
-    }
 }

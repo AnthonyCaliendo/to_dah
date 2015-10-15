@@ -6,25 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.NumberPicker;
 
 import com.anthonycaliendo.todah.R;
+import com.anthonycaliendo.todah.activity.binder.TodoBinder;
 import com.anthonycaliendo.todah.model.Todo;
 
-import java.util.Calendar;
+import static com.anthonycaliendo.todah.util.Instrumentation.debug;
 
 /**
  * Activity which edits to-dos.  This will create new to-dos, update existing to-dos, mark to-dos as completed, or delete them altogether.
  */
 public class EditTodoActivity extends AppCompatActivity {
 
-    private Todo   todo;
-    private Inputs inputs;
+    private Todo       todo;
+    private TodoBinder inputs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +32,7 @@ public class EditTodoActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         todo   = initializeTodo();
-        inputs = new Inputs();
+        inputs = new TodoBinder(findViewById(R.id.edit_todo_view));
 
         inputs.bindFrom(todo);
     }
@@ -88,7 +85,7 @@ public class EditTodoActivity extends AppCompatActivity {
      * @param inputs
      *      the input fields which contain the values to be applied to the to-do
      */
-    private void saveAndFinish(final Todo todo, final Inputs inputs) {
+    private void saveAndFinish(final Todo todo, final TodoBinder inputs) {
         inputs.bindTo(todo);
         setResult(RESULT_OK, getIntent());
         finish();
@@ -102,8 +99,8 @@ public class EditTodoActivity extends AppCompatActivity {
      * @param inputs
      *      the input fields which contain the values to be applied to the to-do
      */
-    private void completeAndFinish(final Todo todo, final Inputs inputs) {
-        debug("action=complete id=" + todo.getId());
+    private void completeAndFinish(final Todo todo, final TodoBinder inputs) {
+        debug(this, "action=complete id=" + todo.getId());
         todo.complete();
         saveAndFinish(todo, inputs);
     }
@@ -139,7 +136,7 @@ public class EditTodoActivity extends AppCompatActivity {
      *      the to-do to delete
      */
     private void deleteAndFinish(final Todo todo) {
-        debug("action=delete id=" + todo.getId());
+        debug(this, "action=delete id=" + todo.getId());
         todo.delete();
         setResult(RESULT_OK, getIntent());
         finish();
@@ -155,7 +152,7 @@ public class EditTodoActivity extends AppCompatActivity {
         final long   todoId = intent.getLongExtra(Todo.ID_INTENT_KEY, -1);
               Todo   todo   = Todo.load(Todo.class, todoId);
 
-        debug("method=initializeTodo id=" + todoId);
+        debug(this, "method=initializeTodo id=" + todoId);
 
         if (todo == null) {
             todo = new Todo();
@@ -164,103 +161,4 @@ public class EditTodoActivity extends AppCompatActivity {
         return todo;
     }
 
-    /**
-     * Logs the message at DEBUG level.
-     * @param message
-     *      the message to log
-     */
-    private void debug(final String message) {
-        Log.d(this.getClass().getSimpleName(), message);
-    }
-
-    /**
-     * Used to bind the EditTodoActivity input fields to and from the to-do object.
-     */
-    private class Inputs {
-        final EditText     titleInput;
-        final EditText     descriptionInput;
-        final DatePicker   dueDateInput;
-        final NumberPicker priorityInput;
-
-        Inputs() {
-            titleInput       = (EditText)     findViewById(R.id.edit_todo_title_input);
-            descriptionInput = (EditText)     findViewById(R.id.edit_todo_description_input);
-            dueDateInput     = (DatePicker)   findViewById(R.id.edit_todo_due_date_input);
-            priorityInput    = (NumberPicker) findViewById(R.id.edit_todo_priority_input);
-
-            priorityInput.setMinValue(0);
-            priorityInput.setMaxValue(9);
-        }
-
-        /**
-         * Sets the values on the input fields based on the values on the to-do object.
-         * @param todo
-         *      the to-do object which has the values to be used to populate the input fields
-         */
-        void bindFrom(final Todo todo) {
-            if (todo == null) {
-                return;
-            }
-
-            titleInput.setText(todo.getTitle());
-            descriptionInput.setText(todo.getDescription());
-            priorityInput.setValue(Long.valueOf(todo.getPriority()).intValue());
-            applyCalendar(dueDateInput, todo.getDueDate());
-        }
-
-        /**
-         * Sets the values on the to-do object based on the values on the input fields.
-         * @param todo
-         *      the to-do object to modify
-         */
-        void bindTo(Todo todo) {
-            if (todo == null) {
-                todo = new Todo();
-            }
-
-            todo.setTitle(titleInput.getText().toString());
-            todo.setDescription(descriptionInput.getText().toString());
-            todo.setDueDate(convertToCalendar(dueDateInput));
-            todo.setPriority(priorityInput.getValue());
-            debug("action=save id=" + todo.getId());
-            todo.save();
-        }
-
-        /**
-         * Sets the values in the DatePicker based on the values in the Calendar.
-         * @param datePicker
-         *      the date picker to set the values on
-         * @param calendar
-         *      the calendar to provide the values to use
-         */
-        private void applyCalendar(final DatePicker datePicker, final Calendar calendar) {
-            if (calendar == null) {
-                return;
-            }
-            datePicker.init(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                    null
-            );
-        }
-
-        /**
-         * Converts the DatePicker into a Calendar instance, using the values from the DatePicker.
-         * @param datePicker
-         *      the date picker whose values will be used to populate the calendar
-         * @return
-         *      the populated Calendar instance
-         */
-        private Calendar convertToCalendar(final DatePicker datePicker) {
-            final Calendar convertedCalendar = Calendar.getInstance();
-            convertedCalendar.set(
-                    datePicker.getYear(),
-                    datePicker.getMonth(),
-                    datePicker.getDayOfMonth()
-            );
-
-            return convertedCalendar;
-        }
-    }
 }
