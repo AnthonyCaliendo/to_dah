@@ -101,7 +101,7 @@ public class EditTodoActivity extends AppCompatActivity {
      */
     private void completeAndFinish(final Todo todo, final TodoBinder inputs) {
         debug(this, "action=complete id=" + todo.getId());
-        todo.complete();
+        todo.toggleCompleted();
         saveAndFinish(todo, inputs);
     }
 

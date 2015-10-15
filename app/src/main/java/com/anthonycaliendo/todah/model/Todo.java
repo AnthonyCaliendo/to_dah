@@ -133,6 +133,27 @@ public class Todo extends Model implements Comparable<Todo> {
         return !isCompleted() && Calendar.getInstance().compareTo(getDueDate()) >= 0;
     }
 
+    public boolean isPending() {
+        return getStatus() == Status.PENDING;
+    }
+
+    /**
+     * Toggles this to-do between completed and pending, and returns the resulting state.
+     * @return
+     *      returns true if the to-do is now completed, and false if it is now pending
+     */
+    public boolean toggleCompleted() {
+        if (isCompleted()) {
+            setCompletedOn(null);
+            setStatus(Status.PENDING);
+        } else {
+            setCompletedOn(Calendar.getInstance());
+            setStatus(Status.COMPLETED);
+        }
+        save();
+        return isCompleted();
+    }
+
     public enum Status {
         PENDING,
         COMPLETED
