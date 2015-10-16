@@ -2,7 +2,9 @@ package com.anthonycaliendo.todah.model;
 
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
+import com.activeandroid.serializer.CalendarSerializer;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,28 +31,51 @@ public class TodoFilter {
      *      the list of filtered to-dos
      */
     public List<Todo> getTodos() {
+        if (!settings.isShowPending() && !settings.isShowCompleted() && !settings.isShowLate()) {
+            debug(this, "showPending=false showCompleted=false showLate=false sql=SKIPPED");
+            return Collections.emptyList();
+        }
+
         final From query = new Select().from(Todo.class);
 
         final StringBuilder whereClause = new StringBuilder();
-        if (settings.isShowPending() && settings.isShowCompleted()) {
-            whereClause.append("status IN (\"");
+        if (settings.isShowPending()) {
+            whereClause.append("(status = \"");
             whereClause.append(Todo.Status.PENDING);
-            whereClause.append("\",\"");
-            whereClause.append(Todo.Status.COMPLETED);
-            whereClause.append("\")");
-        } else if (settings.isShowPending()) {
-            whereClause.append("status = \"");
-            whereClause.append(Todo.Status.PENDING);
-            whereClause.append('"');
-        } else if (settings.isShowCompleted()) {
-            whereClause.append("status = \"");
-            whereClause.append(Todo.Status.COMPLETED);
-            whereClause.append('"');
+            whereClause.append("\" AND (dueDate > ? OR dueDate IS NULL))");
         }
 
-        query.where(whereClause.toString()).orderBy("Priority ASC");
+        if (settings.isShowCompleted()) {
+            if (whereClause.length() > 0) {
+                whereClause.append(" OR ");
+            }
+            whereClause.append("(status = \"");
+            whereClause.append(Todo.Status.COMPLETED);
+            whereClause.append("\")");
+        }
 
-        debug(this, "sql=" + query.toSql());
+        if (settings.isShowLate()) {
+            if (whereClause.length() > 0) {
+                whereClause.append(" OR ");
+            }
+            whereClause.append("(status != \"");
+            whereClause.append(Todo.Status.COMPLETED);
+            whereClause.append("\" AND dueDate <= ?)");
+        }
+
+        final Long currentTime = new CalendarSerializer().serialize(Calendar.getInstance());
+        if (settings.isShowLate() && settings.isShowPending()) {
+            query.where(whereClause.toString(), currentTime, currentTime);
+        } else
+        if (settings.isShowLate() || settings.isShowPending()) {
+            query.where(whereClause.toString(), currentTime);
+        } else {
+            query.where(whereClause.toString());
+        }
+
+        query.orderBy("priority ASC");
+
+        debug(this, "showPending=" + settings.isShowPending() + " showCompleted=" + settings.isShowCompleted() + " showLate=" + settings.isShowLate() + " sql=" + query.toSql());
 
         return query.execute();
     }
